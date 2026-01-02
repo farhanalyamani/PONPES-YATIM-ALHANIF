@@ -11341,3 +11341,187 @@ section#contact form#contactForm :-ms-input-placeholder {
   background-color: #e0a800;
   color: #000;
 }
+
+#contact {
+  background-color: #1f2a44;
+}
+
+#contact h5 {
+  color: #ffffff;
+}
+
+.footer-link {
+  color: #cfd3dc;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: #f7c600;
+  text-decoration: underline;
+}
+
+/* =====================
+   FOOTER PONDOK
+===================== */
+
+.footer-pondok {
+    background: linear-gradient(135deg, #1f1f1f, #2b2b2b);
+    color: #ffffff;
+    padding: 80px 0 60px;
+}
+
+/* Judul footer */
+.footer-title {
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* Subjudul */
+.footer-subtitle {
+    color: #cccccc;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+/* Logo */
+.footer-logo {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+/* Text kecil */
+.footer-pondok p.small {
+    color: #d1d1d1;
+    line-height: 1.7;
+}
+
+/* Link footer */
+.footer-link {
+    color: #d1d1d1;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffc800;
+    transform: translateX(5px);
+}
+
+/* Judul kolom */
+.footer-pondok h5 {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-pondok h5 {
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center; /* PENTING */
+}
+
+.footer-pondok h5::after {
+    content: "";
+    width: 45px;
+    height: 3px;
+    background: #ffc800;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+/* Icon WA */
+.footer-pondok i {
+    color: #25D366;
+    margin-right: 5px;
+}
+.footer-logo {
+    width: 110px;      /* default desktop */
+    height: auto;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.35));
+}
+@media (max-width: 768px) {
+    .footer-logo {
+        width: 90px;
+        margin-bottom: 12px;
+    }
+}
+.footer-logo {
+    transition: transform .3s ease, filter .3s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 12px rgba(255,200,0,.45));
+}
+
+.footer-social i {
+    width: 20px;
+    text-align: center;
+}
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.footer-link:hover {
+    color: #f9c74f; /* kuning emas */
+    transform: translateX(4px);
+}
+
+.footer-link:hover .fa-instagram { color: #E1306C; }
+.footer-link:hover .fa-youtube   { color: #FF0000; }
+.footer-link:hover .fa-facebook-f{ color: #1877F2; }
+.footer-link:hover .fa-tiktok    { color: #000; }
+
+.wa-link i {
+    color: #25D366; /* hijau WhatsApp */
+}
+
+.wa-link:hover i {
+    color: #1ebe5d;
+}
+
+.wa-link:hover {
+    color: #25D366;
+}
+.wa-link {
+    transition: all .3s ease;
+}
+
+.wa-link:hover {
+    transform: translateX(4px);
+}
+
+.wa-link {
+    background: rgba(37, 211, 102, .15);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.wa-link:hover {
+    background: #25D366;
+    color: #fff;
+}
+
+.footer-pondok {
+    background-color: #111;
+    border-radius: 25px 25px 0 0; /* atas melengkung */
+    margin-top: 60px;
+    padding-top: 60px;
+}
+
+
