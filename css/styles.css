@@ -11524,4 +11524,38 @@ section#contact form#contactForm :-ms-input-placeholder {
     padding-top: 60px;
 }
 
+/* Tombol Pendaftaran */
+.btn-daftar {
+  background: linear-gradient(135deg, #198754, #28a745);
+  color: #fff !important;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-daftar:hover {
+  background: linear-gradient(135deg, #157347, #1e7e34);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Alur Pendaftaran */
+.alur-box {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.alur-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.alur-box i {
+  color: #198754;
+}
 
