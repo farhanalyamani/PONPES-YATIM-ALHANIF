@@ -17,6 +17,15 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
+        <script>
+        if (
+        sessionStorage.getItem("userLogin") !== "true" &&
+        sessionStorage.getItem("adminLogin") !== "true"
+        ) {
+        window.location.href = "login.html";
+        }
+        </script>
+
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">

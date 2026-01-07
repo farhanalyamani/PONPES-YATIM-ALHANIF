@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <script>
+if (sessionStorage.getItem("adminLogin") !== "true") {
+  window.location.href = "login.html";
+}
+</script>
+
   <meta charset="UTF-8">
   <title>Login Pendaftaran | Al-Hanif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,9 +90,11 @@ function login(){
   const pass = document.getElementById("password").value;
 
   if(role === "user" && pass === "santri2026"){
+    sessionStorage.setItem("userLogin", "true");
     window.location.href = "pendaftaran.html";
   }
   else if(role === "admin" && pass === "admin2026"){
+    sessionStorage.setItem("adminLogin", "true");
     window.location.href = "admin-psya-8f92.html";
   }
   else{
