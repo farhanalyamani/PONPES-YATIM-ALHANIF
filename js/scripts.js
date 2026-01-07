@@ -52,3 +52,20 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+let allData = [];
+
+function loadData(data) {
+  allData = data;        // simpan semua data
+  renderTable(allData); // render awal
+}
+
+window.onload = () => {
+  document.getElementById("searchInput")?.focus();
+};
+
+if (index === 0) {
+  tr.classList.add("table-success");
+}
+const safe = (v) => v ? v : "-";
+<td>${safe(row.nama)}</td>
