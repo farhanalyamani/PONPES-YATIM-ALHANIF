@@ -9,21 +9,33 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body {
-      background: #f4f6f8;
-    }
-    .admin-header {
-      background: white;
-      padding: 15px 25px;
-      border-bottom: 1px solid #e0e0e0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    iframe {
-      border: none;
-      border-radius: 12px;
-    }
+   .stat-card {
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card h6 {
+  font-size: 14px;
+  color: #666;
+}
+
+.stat-card h2 {
+  font-weight: 700;
+  margin: 5px 0 0;
+}
+
+/* WARNA PER CARD */
+.stat-card.total { border-left: 5px solid #0d6efd; }
+.stat-card.mts   { border-left: 5px solid #198754; }
+.stat-card.ma    { border-left: 5px solid #6f42c1; }
+.stat-card.last  { border-left: 5px solid #fd7e14; }
   </style>
 </head>
 
@@ -52,9 +64,13 @@ if (sessionStorage.getItem("adminLogin") !== "true") {
   </div>
 </nav>
 
-<small class="text-muted">
-  Status sistem: <span class="text-success">● Online</span>
-</small>
+<!-- SISTEM ONLINE -->
+<div class="px-4 py-2">
+  <span class="badge bg-success">
+    ● Sistem Online
+  </span>
+</div>
+
 
 
 <!-- CONTENT -->
@@ -67,70 +83,86 @@ if (sessionStorage.getItem("adminLogin") !== "true") {
       ⚠️ Data bersifat rahasia. Dilarang menyebarkan tanpa izin pimpinan pondok.
       </div>
 
-        <div class="row mb-4" id="dashboard">
-          <div class="col-md-3">
-            <div class="card shadow-sm text-center">
+       <div class="row g-3 mb-4" id="dashboard">
+          <div class="col-12 col-md-3">
+            <div class="card stat-card total text-center h-100">
               <div class="card-body">
-                <h6>Total Pendaftar</h6>
+                <h6>👥 Total Pendaftar</h6>
                 <h3 id="total">0</h3>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="card shadow-sm text-center">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card mts text-center h-100">
               <div class="card-body">
-                <h6>Tsanawiyah</h6>
+                <h6>📘 Tsanawiyah</h6>
                 <h3 id="mts">0</h3>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="card shadow-sm text-center">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card ma text-center h-100">
               <div class="card-body">
-                <h6>Aliyah</h6>
+                <h6>🎓 Aliyah</h6>
                 <h3 id="ma">0</h3>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="card shadow-sm text-center">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card stat-card last text-center h-100">
               <div class="card-body">
-                <h6>Update Terakhir</h6>
+                <h6>⏱ Update Terakhir</h6>
                 <small id="last">-</small>
               </div>
             </div>
           </div>
         </div>
 
-        <div style="display:flex; gap:10px; margin-bottom:15px;">
-  <input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Cari nama / NISN / sekolah..."
-    style="flex:1; padding:8px;"
-    onkeyup="applyFilter()"
-  >
 
-  <select id="filterJenjang" onchange="applyFilter()" style="padding:8x;">
-    <option value="">Semua Jenjang</option>
-    <option value="Madrasah Tsanawiyah">Tsanawiyah</option>
-    <option value="Madrasah Aliyah">Aliyah</option>
-  </select>
+        <!-- SEARCH BAR -->
+       <div class="row g-2 mb-4">
+  <div class="col-md-8">
+    <input
+      type="text"
+      id="searchInput"
+      class="form-control"
+      placeholder="🔍 Cari nama / NISN / sekolah..."
+      onkeyup="applyFilter()"
+    >
+  </div>
+
+  <div class="col-md-4">
+    <select
+      id="filterJenjang"
+      class="form-select"
+      onchange="applyFilter()"
+    >
+      <option value="">Semua Jenjang</option>
+      <option value="Madrasah Tsanawiyah">Tsanawiyah</option>
+      <option value="Madrasah Aliyah">Aliyah</option>
+    </select>
+  </div>
 </div>
 
+
 <!-- LOADING -->
-      <div id="loading" class="text-center my-4">
-        <div class="spinner-border text-primary" role="status"></div>
-        <p class="mt-2">Memuat data pendaftar...</p>
-      </div>
+      <div id="loading" class="text-center my-5">
+  <div class="spinner-border text-primary" style="width:3rem;height:3rem"></div>
+  <p class="mt-2 text-muted">⏳ Mengambil data pendaftar dari sistem...</p>
+</div>
+
         <!-- TAMPILAN SPREEDSHET -->
             <div id="dataContainer" style="display:none;">
         <iframe
           src="https://docs.google.com/spreadsheets/d/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/preview"
           width="100%" height="650">
+          <button class="btn btn-outline-primary btn-sm" onclick="location.reload()">
+  🔄 Refresh Data
+</button>
+
         </iframe>
       </div>
 
@@ -150,38 +182,57 @@ function logout(){
     Sistem Pendaftaran Santri Baru – Akses Admin
   </small>
 </footer>
+<script>
+const url = "https://opensheet.elk.sh/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/Form Responses 1";
 
-      <script>
-      const sheetId = "1N7cf9RokOadpMwD65EBvUk0MyMS_ESryXUfOlfYyUOw";
-      const url = `https://opensheet.elk.sh/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/Form Responses 1`;
+function animateNumber(id, target) {
+  let current = 0;
+  const el = document.getElementById(id);
+  const step = Math.max(1, Math.ceil(target / 40));
 
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("total").innerText = data.length;
+  const interval = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(interval);
+    }
+    el.innerText = current;
+  }, 25);
+}
 
-          let mts = 0, ma = 0;
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    console.log("DATA:", data);
 
-          data.forEach(row => {
-            const jenjang = row["Jenjang Pendidikan"]?.toLowerCase();
+    animateNumber("total", data.length);
 
-            if(jenjang?.includes("tsanawiyah")) mts++;
-            if(jenjang?.includes("aliyah")) ma++;
-          });
+    let mts = 0, ma = 0;
 
-          document.getElementById("mts").innerText = mts;
-          document.getElementById("ma").innerText = ma;
+    data.forEach(row => {
+      const text = Object.values(row).join(" ").toLowerCase();
+      if (text.includes("tsanawiyah")) mts++;
+      if (text.includes("aliyah")) ma++;
+    });
 
-          if(data.length > 0){
-            document.getElementById("last").innerText =
-              data[data.length - 1]["Timestamp"];
-          }
-                  // MATIIN LOADING
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("dataContainer").style.display = "block";
-        });
-        
-      </script>
+    animateNumber("mts", mts);
+    animateNumber("ma", ma);
+
+    if (data.length > 0) {
+      document.getElementById("last").innerText =
+        data[data.length - 1]["Timestamp"] || "-";
+    }
+  })
+  .catch(err => {
+    console.error("FETCH ERROR:", err);
+    alert("Gagal mengambil data Google Sheets");
+  })
+  .finally(() => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("dataContainer").style.display = "block";
+  });
+</script>
+
 
       <script src="js/scripts.js"></script>
 </body>

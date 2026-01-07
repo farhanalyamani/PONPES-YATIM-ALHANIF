@@ -11761,3 +11761,11 @@ section#contact form#contactForm :-ms-input-placeholder {
     height: 18px;
   }
 }
+#dashboard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#dashboard > div {
+  display: flex;
+}
