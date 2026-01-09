@@ -11769,3 +11769,50 @@ section#contact form#contactForm :-ms-input-placeholder {
 #dashboard > div {
   display: flex;
 }
+/* === NAVBAR FIX AGENCY === */
+
+#mainNav {
+  background-color: transparent !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mainNav.navbar-shrink {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.iframe-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* iframe DI DEPAN */
+.iframe-wrapper iframe {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 800px;
+  background: transparent;
+}
+
+/* PESAN DI BELAKANG */
+.form-success {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  z-index: 1;
+
+  padding: 16px;
+  background: #e6f7ec;
+  border: 3px solid #b7ebc6;
+  color: #1e7e34;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 14px;
+
+  display: none;
+}

@@ -36,9 +36,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services"></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio"></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about"></a></li>
                         <li class="nav-item"><a class="nav-link" href="#pendaftaran">Pendaftaran</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Informasi</a></li>
                         <li class="nav-item ms-lg-3">
@@ -108,12 +105,22 @@
   </div>
 
   <div class="iframe-wrapper">
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSel6VtF3R_mkex7UaCf9sLA9zKMfrS6jGv1-ycJbp69mKalGg/viewform?embedded=true"
-      loading="lazy"
-      frameborder="0">
-    </iframe>
+
+  <!-- PESAN DI BELAKANG -->
+  <div id="formSuccess" class="form-success">
+    ✅ Data Anda telah terkirim.<br>
+    Anda Bisa Menghubungi Admin Melalui WhatsApp Yang Ada Dibawah Ini.
   </div>
+
+  <!-- IFRAME DI DEPAN -->
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSel6VtF3R_mkex7UaCf9sLA9zKMfrS6jGv1-ycJbp69mKalGg/viewform?embedded=true"
+    loading="lazy"
+    frameborder="0">
+  </iframe>
+
+</div>
+
   <div class="form-scroll-hint">
   <span>⬇ Scroll ke bawah untuk melanjutkan pengisian formulir</span>
 </div>
@@ -283,5 +290,24 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+          <!-- SCRIPT DATA ANDA TELAH DIKIRIM -->
+       <script>
+let iframeLoadCount = 0;
+
+const iframe = document.querySelector(".iframe-wrapper iframe");
+const successBox = document.getElementById("formSuccess");
+
+iframe.addEventListener("load", () => {
+  iframeLoadCount++;
+
+  // load ke-2 = setelah submit
+  if (iframeLoadCount > 7) {
+    successBox.style.display = "block";
+    successBox.scrollIntoView({ behavior: "smooth" });
+  }
+});
+</script>
+
     </body>
 </html>
