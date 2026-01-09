@@ -156,14 +156,50 @@ if (sessionStorage.getItem("adminLogin") !== "true") {
 
         <!-- TAMPILAN SPREEDSHET -->
             <div id="dataContainer" style="display:none;">
-        <iframe
-          src="https://docs.google.com/spreadsheets/d/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/preview"
-          width="100%" height="650">
-          <button class="btn btn-outline-primary btn-sm" onclick="location.reload()">
-  🔄 Refresh Data
-</button>
+     
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <small class="text-muted">
+    Menampilkan data pendaftar santri
+  </small>
 
-        </iframe>
+  <div class="d-flex gap-2">
+    <a
+      href="https://docs.google.com/spreadsheets/d/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck"
+      target="_blank"
+      class="btn btn-sm btn-outline-secondary"
+    >
+      📄 Spreadsheet
+    </a>
+
+    <button
+      class="btn btn-sm btn-outline-primary"
+      onclick="location.reload()"
+    >
+      🔄 Refresh
+    </button>
+  </div>
+</div>
+
+<div class="table-responsive">
+
+
+
+<div class="table-responsive">
+  <table class="table table-bordered align-middle">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Jenjang</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+
       </div>
 
     </div>
@@ -178,10 +214,12 @@ function logout(){
 </script>
 <footer class="text-center text-muted py-3 mt-auto border-top">
   <small>
-    © 2026 <b>PSB Pondok Pesantren Yatim Al-Hanif</b><br>
+    © 2026 <b>PPDB Pondok Pesantren Yatim Al-Hanif</b><br>
     Sistem Pendaftaran Santri Baru – Akses Admin
   </small>
 </footer>
+
+
 <script>
 const url = "https://opensheet.elk.sh/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/Form Responses 1";
 
@@ -205,14 +243,17 @@ fetch(url)
   .then(data => {
     console.log("DATA:", data);
 
+    // =====================
+    // STATISTIK
+    // =====================
     animateNumber("total", data.length);
 
     let mts = 0, ma = 0;
 
     data.forEach(row => {
-      const text = Object.values(row).join(" ").toLowerCase();
-      if (text.includes("tsanawiyah")) mts++;
-      if (text.includes("aliyah")) ma++;
+      const jenjang = (row["Jenjang Pendidikan"] || "").toLowerCase();
+      if (jenjang.includes("tsanawiyah")) mts++;
+      if (jenjang.includes("aliyah")) ma++;
     });
 
     animateNumber("mts", mts);
@@ -222,6 +263,39 @@ fetch(url)
       document.getElementById("last").innerText =
         data[data.length - 1]["Timestamp"] || "-";
     }
+
+    // =====================
+    // ISI TABEL
+    // =====================
+    const tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+
+    data.forEach((row, i) => {
+      const status = row["Status Pembayaran"] || "Belum Bayar";
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${row["Nama Lengkap"] || "-"}</td>
+          <td>${row["Jenjang Pendidikan"] || "-"}</td>
+          <td>
+            <span class="badge ${status === "Lunas" ? "bg-success" : "bg-danger"}">
+              ${status}
+            </span>
+          </td>
+          <td>
+            ${
+              status === "Lunas"
+                ? "-"
+                : `<button class="btn btn-sm btn-success"
+                    onclick="markPaid(${i + 2})">
+                    Tandai Lunas
+                  </button>`
+            }
+          </td>
+        </tr>
+      `;
+    });
   })
   .catch(err => {
     console.error("FETCH ERROR:", err);
@@ -231,7 +305,77 @@ fetch(url)
     document.getElementById("loading").style.display = "none";
     document.getElementById("dataContainer").style.display = "block";
   });
+
+function markPaid(rowNumber) {
+  if (!confirm("Yakin tandai pembayaran sebagai LUNAS?")) return;
+
+  fetch("https://script.google.com/macros/s/AKfycbw5crgmFoxBf8L9M0qewPrt-iw2u8uFeud9fFNo0rm8xVg50i7fFNxl3Gzg6HEwv75O/exec", {
+    method: "POST",
+    body: JSON.stringify({ row: rowNumber })
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("✅ Status pembayaran diperbarui");
+    location.reload();
+  })
+  .catch(() => {
+    alert("❌ Gagal update data");
+  });
+}
 </script>
+
+<style>
+
+/* ===== TABEL ADMIN ===== */
+.table {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: #1f2937;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+}
+
+.table tbody tr {
+  transition: 0.2s;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+  padding: 12px;
+}
+
+/* ===== BADGE STATUS ===== */
+.badge {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+/* ===== TOMBOL AKSI ===== */
+.btn-success {
+  background: #16a34a;
+  border: none;
+}
+
+.btn-success:hover {
+  background: #15803d;
+}
+
+.btn-outline-secondary {
+  border-radius: 8px;
+}
+</style>
+
 
 
       <script src="js/scripts.js"></script>
