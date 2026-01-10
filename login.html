@@ -50,52 +50,44 @@
 
 <body>
 
+    <!-- Kotak Login -->
 <div class="login-card text-center">
-  <img src="assets/img/logo-contact.jpg" alt="Logo Al-Hanif">
 
-  <h4 class="mb-3">Login Sistem Pendaftaran</h4>
-  <p class="text-muted mb-4">Pondok Pesantren Yatim Al-Hanif</p>
+  <form id="loginForm">
 
-  <div class="mb-3 text-start">
-    <label class="form-label">Masuk sebagai</label>
-    <select id="role" class="form-select">
-      <option value="user">Santri / User</option>
-      <option value="admin">Admin</option>
-    </select>
-  </div>
+    <img src="assets/img/logo-contact.jpg" alt="Logo Al-Hanif">
 
-  <div class="mb-4 text-start">
-    <label class="form-label">Password</label>
-    <input type="password" id="password" class="form-control" placeholder="Masukkan password">
-  </div>
+    <h4 class="mb-3">Login Sistem Pendaftaran</h4>
+    <p class="text-muted mb-4">Pondok Pesantren Yatim Al-Hanif</p>
 
-  <button class="btn btn-login w-100" onclick="login()">
-    <i class="fas fa-sign-in-alt me-2"></i> Masuk
-  </button>
+    <div class="mb-3 text-start">
+      <label class="form-label">Masuk sebagai</label>
+      <select id="role" class="form-select">
+        <option value="user">Santri / User</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <div class="mb-4 text-start" id="passwordGroup" style="display: none;">
+      <label class="form-label">Password</label>
+      <input type="password" id="password" class="form-control" placeholder="Masukkan password">
+    </div>
+
+    <!-- ❗ tombol HARUS di dalam form -->
+    <button type="submit" class="btn btn-login w-100">
+      <i class="fas fa-sign-in-alt me-2"></i> Masuk
+    </button>
+
+  </form>
 
   <p class="text-muted small mt-4">
     © 2026 Pondok Pesantren Yatim Al-Hanif
   </p>
+
 </div>
 
-<script>
-function login(){
-  const role = document.getElementById("role").value;
-  const pass = document.getElementById("password").value;
 
-  if(role === "user" && pass === "santri2026"){
-    sessionStorage.setItem("userLogin", "true");
-    window.location.href = "pendaftaran.html";
-  }
-  else if(role === "admin" && pass === "admin2026"){
-    sessionStorage.setItem("adminLogin", "true");
-    window.location.href = "admin-psya-8f92.html";
-  }
-  else{
-    alert("❌ Password salah!");
-  }
-}
-</script>
+<script src="js/login.js" defer></script>
 
 </body>
 </html>
