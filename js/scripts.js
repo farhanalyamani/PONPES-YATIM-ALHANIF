@@ -44,3 +44,14 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const flyer = document.getElementById("flyerModal");
+  if (!flyer) return;
+
+  const flyerModal = new bootstrap.Modal(flyer);
+  flyerModal.show();
+
+});
+
