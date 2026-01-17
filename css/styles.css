@@ -11816,3 +11816,18 @@ section#contact form#contactForm :-ms-input-placeholder {
 
   display: none;
 }
+
+/* PROFIL FOOTER */
+.footer-profil .footer-nama {
+  margin-bottom: 2px;    /* rapet nama */
+}
+
+.footer-profil .footer-nspp {
+  margin-top: 0;
+  margin-bottom: 14px;  /* masih deket nama */
+  font-weight: 500;
+}
+
+.footer-profil .footer-email {
+  margin-top: 20px;     /* email agak jauh */
+}
