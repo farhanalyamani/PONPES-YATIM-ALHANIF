@@ -11831,3 +11831,10 @@ section#contact form#contactForm :-ms-input-placeholder {
 .footer-profil .footer-email {
   margin-top: 20px;     /* email agak jauh */
 }
+tr.lunas {
+  background: #ecfdf5;
+}
+
+tr.belum {
+  background: #fef2f2;
+}
