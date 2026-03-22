@@ -228,6 +228,7 @@ function logout(){
 
 <script>
 const url = "https://opensheet.elk.sh/1UQr8bh1XIxJSbH76HsjvLZDXUHIIcqLbXZR0NhcZjck/Form Responses 1";
+let allData = [];
 
 function animateNumber(id, target) {
   let current = 0;
@@ -247,7 +248,7 @@ function animateNumber(id, target) {
 fetch(url)
   .then(res => res.json())
   .then(data => {
-    console.log("DATA:", data);
+    allData = data; // simpan data
 
     // =====================
     // STATISTIK
@@ -269,39 +270,11 @@ fetch(url)
       document.getElementById("last").innerText =
         data[data.length - 1]["Timestamp"] || "-";
     }
-
+    renderTable(allData);
     // =====================
     // ISI TABEL
     // =====================
-    const tbody = document.getElementById("tableBody");
-    tbody.innerHTML = "";
-
-    data.forEach((row, i) => {
-      const status = row["Status Pembayaran"] || "Belum Bayar";
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td>
-          <td>${row["Nama Lengkap"] || "-"}</td>
-          <td>${row["Jenjang Pendidikan"] || "-"}</td>
-          <td>
-            <span class="badge ${status === "Lunas" ? "bg-success" : "bg-danger"}">
-              ${status}
-            </span>
-          </td>
-          <td>
-            ${
-              status === "Lunas"
-                ? "-"
-                : `<button class="btn btn-sm btn-success"
-                    onclick="markPaid(${i + 2})">
-                    Tandai Lunas
-                  </button>`
-            }
-          </td>
-        </tr>
-      `;
-    });
+   
   })
   .catch(err => {
     console.error("FETCH ERROR:", err);
@@ -312,6 +285,60 @@ fetch(url)
     document.getElementById("dataContainer").style.display = "block";
   });
 
+    function renderTable(data) {
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+
+  data.forEach((row, i) => {
+    const status = row["Status Pembayaran"] || "Belum Bayar";
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${row["Nama Lengkap"] || "-"}</td>
+        <td>${row["Jenjang Pendidikan"] || "-"}</td>
+        <td>
+          <span class="badge ${status === "Lunas" ? "bg-success" : "bg-danger"}">
+            ${status}
+          </span>
+        </td>
+        <td>
+          ${
+            status === "Lunas"
+              ? "-"
+              : `<button class="btn btn-sm btn-success"
+                  onclick="markPaid(${i + 2})">
+                  Tandai Lunas
+                </button>`
+          }
+        </td>
+      </tr>
+    `;
+  });
+}
+function applyFilter() {
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  const jenjang = document.getElementById("filterJenjang").value;
+
+  const filtered = allData.filter(row => {
+    const nama = (row["Nama Lengkap"] || "").toLowerCase();
+    const nisn = (row["NISN"] || "").toLowerCase();
+    const sekolah = (row["Asal Sekolah"] || "").toLowerCase();
+    const jenjangData = (row["Jenjang Pendidikan"] || "").toLowerCase();
+
+    const matchSearch =
+      nama.includes(keyword) ||
+      nisn.includes(keyword) ||
+      sekolah.includes(keyword);
+
+    const matchJenjang =
+      !jenjang || jenjangData.includes(jenjang.toLowerCase());
+
+    return matchSearch && matchJenjang;
+  });
+
+  renderTable(filtered);
+}
 function markPaid(rowNumber) {
   if (!confirm("Yakin tandai pembayaran sebagai LUNAS?")) return;
 
