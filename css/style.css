@@ -1,0 +1,80 @@
+tr.lunas {
+  background: #ecfdf5;
+}
+
+tr.belum {
+  background: #fef2f2;
+}
+body {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+}
+.card {
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  backdrop-filter: blur(6px);
+}
+.stat-card {
+  border-radius: 16px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+.stat-card.total { border-left: 5px solid #3b82f6; }
+.stat-card.mts   { border-left: 5px solid #22c55e; }
+.stat-card.ma    { border-left: 5px solid #a855f7; }
+.stat-card.last  { border-left: 5px solid #f97316; }
+#searchInput {
+  border-radius: 12px;
+  padding: 10px 14px;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+#searchInput:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: linear-gradient(90deg, #1e293b, #334155);
+}
+
+.table thead th {
+  color: #fff;
+  border: none;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: #f1f5f9;
+}
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.btn-success {
+  border-radius: 10px;
+  padding: 5px 12px;
+  font-size: 13px;
+}
+.container {
+  max-width: 1500px;
+}
+.navbar {
+  background: linear-gradient(90deg, #0f172a, #1e293b);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
